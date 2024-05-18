@@ -1,15 +1,17 @@
 package game.HuLaTa;
 
+import java.awt.*;
 
-public class Game_Level extends javax.swing.JFrame {
+public class Game_Slang extends javax.swing.JFrame {
 
-    private int easyseconds = 300;
-
-    public Game_Level() {
+    /**
+     * Creates new form Game_Extreme
+     */
+    public Game_Slang() {
         initComponents();
     }
 
-
+    private int attempt = 5;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -21,7 +23,6 @@ public class Game_Level extends javax.swing.JFrame {
         Extreme = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocationByPlatform(true);
         setResizable(false);
 
         Easy.setBackground(new java.awt.Color(102, 255, 102));
@@ -68,7 +69,7 @@ public class Game_Level extends javax.swing.JFrame {
         Extreme.setBackground(new java.awt.Color(51, 255, 255));
         Extreme.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         Extreme.setForeground(new java.awt.Color(255, 255, 255));
-        Extreme.setText("SLANG");
+        Extreme.setText("EXTREME");
         Extreme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExtremeActionPerformed(evt);
@@ -79,39 +80,36 @@ public class Game_Level extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Easy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Average))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(85, 85, 85)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Easy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Average))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Hard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Extreme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(87, 87, 87))
+                    .addComponent(Extreme))
+                .addGap(73, 73, 73))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(219, 219, 219))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+                .addGap(121, 121, 121)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Easy)
-                    .addComponent(Hard))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                    .addComponent(Hard)
+                    .addComponent(Easy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Average)
                     .addComponent(Extreme))
-                .addGap(64, 64, 64)
+                .addGap(42, 42, 42)
                 .addComponent(Back)
-                .addGap(46, 46, 46))
+                .addGap(68, 68, 68))
         );
-
-        Easy.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -121,13 +119,6 @@ public class Game_Level extends javax.swing.JFrame {
         Game_Easy game1 = new Game_Easy(easyseconds);
         game1.setVisible(true);
     }//GEN-LAST:event_EasyActionPerformed
-
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-    
-        this.setVisible(false);
-        Start start = new Start();
-        start.setVisible(true);
-    }//GEN-LAST:event_BackActionPerformed
 
     private void AverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AverageActionPerformed
         this.setVisible(false);
@@ -140,6 +131,13 @@ public class Game_Level extends javax.swing.JFrame {
         Game_Hard game3 = new Game_Hard();
         game3.setVisible(true);
     }//GEN-LAST:event_HardActionPerformed
+
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+
+        this.setVisible(false);
+        Start start = new Start();
+        start.setVisible(true);
+    }//GEN-LAST:event_BackActionPerformed
 
     private void ExtremeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExtremeActionPerformed
         this.setVisible(false);
@@ -164,13 +162,13 @@ public class Game_Level extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game_Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Slang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game_Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Slang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game_Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Slang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game_Level.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Slang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -178,7 +176,7 @@ public class Game_Level extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Game_Level().setVisible(true);
+                new Game_Slang().setVisible(true);
             }
         });
     }

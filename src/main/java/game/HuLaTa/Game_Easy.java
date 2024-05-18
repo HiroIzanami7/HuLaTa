@@ -1,19 +1,33 @@
 package game.HuLaTa;
 
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 public class Game_Easy extends javax.swing.JFrame {
-private final Connection connection;
-
-    public Game_Easy() {
+    
+    
+    private javax.swing.Timer timer;
+    private int secondsRemaining;
+    
+    public Game_Easy(int easyseconds) {
         initComponents();
-        
-        connection = connectToDatabase();
+        this.secondsRemaining = easyseconds;
+        updateTimerLabel();
+        timer = new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondsRemaining--;
+                if (secondsRemaining <= 0) {
+                    timer.stop();
+                    Time.setText("Time's up!");
+                } else {
+                    updateTimerLabel();
+                }
+            }
+        });
+        timer.start();
     }
 
     @SuppressWarnings("unchecked")
@@ -23,6 +37,7 @@ private final Connection connection;
         jDialog1 = new javax.swing.JDialog();
         jDialog2 = new javax.swing.JDialog();
         jDialog3 = new javax.swing.JDialog();
+        jFrame1 = new javax.swing.JFrame();
         Newgame = new javax.swing.JButton();
         Check = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -33,6 +48,7 @@ private final Connection connection;
         Letter5 = new javax.swing.JTextField();
         Attempt = new javax.swing.JLabel();
         History = new javax.swing.JTextPane();
+        Time = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -67,6 +83,17 @@ private final Connection connection;
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
         setResizable(false);
@@ -97,6 +124,9 @@ private final Connection connection;
         Letter1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Letter1.setActionCommand("<Not Set>");
         Letter1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Letter1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Letter1KeyReleased(evt);
             }
@@ -108,6 +138,9 @@ private final Connection connection;
         Letter2.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
         Letter2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Letter2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Letter2KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Letter2KeyReleased(evt);
             }
@@ -119,6 +152,9 @@ private final Connection connection;
         Letter3.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
         Letter3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Letter3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Letter3KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Letter3KeyReleased(evt);
             }
@@ -130,6 +166,9 @@ private final Connection connection;
         Letter4.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
         Letter4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Letter4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Letter4KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Letter4KeyReleased(evt);
             }
@@ -141,6 +180,9 @@ private final Connection connection;
         Letter5.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
         Letter5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         Letter5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Letter5KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 Letter5KeyReleased(evt);
             }
@@ -180,29 +222,38 @@ private final Connection connection;
         );
 
         Attempt.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        Attempt.setText("Attempt:5");
+        Attempt.setText("Time Remaining:");
 
         History.setEditable(false);
         History.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PREVIOUS WORDS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Rounded MT Bold", 3, 14), new java.awt.Color(204, 0, 51))); // NOI18N
+
+        Time.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(132, 132, 132)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(Attempt))))
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)
-                        .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(Attempt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)))
                 .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -212,172 +263,188 @@ private final Connection connection;
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Attempt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(57, 57, 57))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Attempt, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 74, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private int attempt =5;
-        
-    private Connection connectToDatabase() {
-        Connection conn = null;
-        try {
-            String url = "jdbc:mysql://localhost:3306/words";
-            String username = "root";
-            String password = "SS1234567.07";
-            conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connected to the database");
-        } catch (SQLException e) {
-            System.out.println("Error connecting to the database: " + e.getMessage());
-        }
-        return conn;
+
+    private void updateTimerLabel() {
+        int minutes = secondsRemaining / 60;
+        int seconds = secondsRemaining % 60;
+        Time.setText(String.format("%02d:%02d", minutes, seconds));
     }
-    
-    private boolean checkLetterInDatabase(String letter) {
-        try {
-            String query = "select * from words";
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, letter);
-            ResultSet resultSet = statement.executeQuery();
-            return resultSet.next();
-        } catch (SQLException e) {
-            System.out.println("Error executing SQL query: " + e.getMessage());
-            return false;
-        }   
-    }
-    
     private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
-       
+        boolean timeAddedForLetter = true;
         String userinput1 = Letter1.getText();
         String userinput2 = Letter2.getText();
         String userinput3 = Letter3.getText();
         String userinput4 = Letter4.getText();
         String userinput5 = Letter5.getText();
         if( true){
-            if(userinput1.equals("G")){
-                Letter1.setBackground(Color.GREEN);
-                Letter1.setEnabled(false);
-            }
-            else if(userinput1.equals("T")){
-                Letter1.setBackground(Color.ORANGE);
-                Letter1.setEnabled(true);
-            }
-            else if(userinput1.equals("S")){
-                Letter1.setBackground(Color.ORANGE);
-                Letter1.setEnabled(true);
-            }
-            else if(userinput1.equals("A")){
-                Letter1.setBackground(Color.ORANGE);
-                Letter1.setEnabled(true);
-            }
-            else{
-                Letter1.setBackground(Color.RED);
-                Letter1.setEnabled(true);
-            }
-        }
-        if( true){
-            if(userinput2.equals("A")){
-                Letter2.setBackground(Color.GREEN);
-                Letter2.setEnabled(false);
-            }
-            else if(userinput2.equals("T")){
-                Letter2.setBackground(Color.ORANGE);
-                Letter2.setEnabled(true);
-            }
-            else if(userinput2.equals("G")){
-                Letter2.setBackground(Color.ORANGE);
-                Letter2.setEnabled(true);
-            }
-            else if(userinput2.equals("S")){
-                Letter2.setBackground(Color.ORANGE);
-                Letter2.setEnabled(true);
-            }
-            else{
-                Letter2.setBackground(Color.RED);
-                Letter2.setEnabled(true);
+            switch (userinput1) {
+                case "G" -> {
+                    Letter1.setBackground(Color.GREEN);
+                    Letter1.setEnabled(false);
+                    if(userinput1.equals("G") && timeAddedForLetter){
+                       secondsRemaining +=10;
+                       timeAddedForLetter=false;
+                    }
+                    else{}
+                }
+                
+                case "T" -> {
+                    Letter1.setBackground(Color.ORANGE);
+                    Letter1.setEnabled(true);
+                }
+                case "S" -> {
+                    Letter1.setBackground(Color.ORANGE);
+                    Letter1.setEnabled(true);
+                }
+                case "A" -> {
+                    Letter1.setBackground(Color.ORANGE);
+                    Letter1.setEnabled(true);
+                }
+                default -> {
+                    Letter1.setBackground(Color.RED);
+                    Letter1.setEnabled(true);
+                    Letter1.setText("");
+                }
             }
         }
         if( true){
-            if(userinput3.equals("T")){
-                Letter3.setBackground(Color.GREEN);
-                Letter3.setEnabled(false);
-            }
-            else if(userinput4.equals("A")){
-                Letter3.setBackground(Color.ORANGE);
-                Letter3.setEnabled(true);
-            }
-            else if(userinput4.equals("G")){
-                Letter3.setBackground(Color.ORANGE);
-                Letter3.setEnabled(true);
-            }
-            else if(userinput3.equals("S")){
-                Letter3.setBackground(Color.ORANGE);
-                Letter3.setEnabled(true);
-            }
-            else{
-                Letter3.setBackground(Color.RED);
-                Letter3.setEnabled(true);
-            }
-        }
-        if( true){
-            if(userinput4.equals("A")){
-                Letter4.setBackground(Color.GREEN);
-                Letter4.setEnabled(false);
-            }
-            else if(userinput4.equals("T")){
-                Letter4.setBackground(Color.ORANGE);
-                Letter4.setEnabled(true);
-            }
-            else if(userinput4.equals("G")){
-                Letter4.setBackground(Color.ORANGE);
-                Letter4.setEnabled(true);
-            }
-            else if(userinput4.equals("S")){
-                Letter4.setBackground(Color.ORANGE);
-                Letter4.setEnabled(true);
-            }
-            else{
-                Letter4.setBackground(Color.RED);
-                Letter4.setEnabled(true);
+            switch (userinput2) {
+                case "A" -> {
+                    Letter2.setBackground(Color.GREEN);
+                    Letter2.setEnabled(false);
+                    if(userinput2.equals("A") &&!timeAddedForLetter){
+                       secondsRemaining +=10;
+                       timeAddedForLetter=true;
+                    }
+                    else{}
+                }
+                case "T" -> {
+                    Letter2.setBackground(Color.ORANGE);
+                    Letter2.setEnabled(true);
+                }
+                case "G" -> {
+                    Letter2.setBackground(Color.ORANGE);
+                    Letter2.setEnabled(true);
+                }
+                case "S" -> {
+                    Letter2.setBackground(Color.ORANGE);
+                    Letter2.setEnabled(true);
+                }
+                default -> {
+                    Letter2.setBackground(Color.RED);
+                    Letter2.setEnabled(true);
+                    Letter2.setText("");
+                }
             }
         }
         if( true){
-            if(userinput5.equals("S")){
-                Letter5.setBackground(Color.GREEN);
-                Letter5.setEnabled(false);
-            }
-            else if(userinput5.equals("A")){
-                Letter5.setBackground(Color.ORANGE);
-                Letter5.setEnabled(true);
-            }
-            else if(userinput5.equals("G")){
-                Letter5.setBackground(Color.ORANGE);
-                Letter5.setEnabled(true);
-            }
-            else if(userinput5.equals("T")){
-                Letter5.setBackground(Color.ORANGE);
-                Letter5.setEnabled(true);
-            }
-            else{
-                Letter5.setBackground(Color.RED);
-                Letter5.setEnabled(true);
+             switch (userinput3) {
+                case "T" -> {
+                    Letter3.setBackground(Color.GREEN);
+                    Letter3.setEnabled(false);
+                    if(userinput3.equals("T") &&!timeAddedForLetter){
+                       secondsRemaining +=10;
+                       timeAddedForLetter=true;
+                    }
+                    else{}
+                }
+                case "A" -> {
+                    Letter3.setBackground(Color.ORANGE);
+                    Letter3.setEnabled(true);
+                }
+                case "G" -> {
+                    Letter3.setBackground(Color.ORANGE);
+                    Letter3.setEnabled(true);
+                }
+                case "S" -> {
+                    Letter3.setBackground(Color.ORANGE);
+                    Letter3.setEnabled(true);
+                }
+                default -> {
+                    Letter3.setBackground(Color.RED);
+                    Letter3.setEnabled(true);
+                    Letter3.setText("");
+                }
             }
         }
-       
-        if (attempt > 0){
-            attempt -= 1;
-            Attempt.setText("Attempt:"+attempt);
-            History.setText(userinput1+userinput2+userinput3+userinput4+userinput5);
+        if( true){
+            switch (userinput4) {
+                case "A" -> {
+                    Letter4.setBackground(Color.GREEN);
+                    Letter4.setEnabled(false);
+                    if(userinput4.equals("A") &&!timeAddedForLetter){
+                       secondsRemaining +=10;
+                       timeAddedForLetter=true;
+                    }
+                    else{}
+                }
+                case "T" -> {
+                    Letter4.setBackground(Color.ORANGE);
+                    Letter4.setEnabled(true);
+                }
+                case "G" -> {
+                    Letter4.setBackground(Color.ORANGE);
+                    Letter4.setEnabled(true);
+                }
+                case "S" -> {
+                    Letter4.setBackground(Color.ORANGE);
+                    Letter4.setEnabled(true);
+                }
+                default -> {
+                    Letter4.setBackground(Color.RED);
+                    Letter4.setEnabled(true);
+                    Letter4.setText("");
+                }
+            }
+        }
+        if( true){
+            switch (userinput5) {
+                case "S" -> {
+                    Letter5.setBackground(Color.GREEN);
+                    Letter5.setEnabled(false);
+                    if(userinput5.equals("S") &&!timeAddedForLetter){
+                       secondsRemaining +=10;
+                       timeAddedForLetter=true;
+                    }
+                    else{}
+                }
+                case "A" -> {
+                    Letter5.setBackground(Color.ORANGE);
+                    Letter5.setEnabled(true);
+                }
+                case "G" -> {
+                    Letter5.setBackground(Color.ORANGE);
+                    Letter5.setEnabled(true);
+                }
+                case "T" -> {
+                    Letter5.setBackground(Color.ORANGE);
+                    Letter5.setEnabled(true);
+                }
+                default -> {
+                    Letter5.setBackground(Color.RED);
+                    Letter5.setEnabled(true);
+                    Letter5.setText("");
+                }
+            }
         }
     }//GEN-LAST:event_CheckActionPerformed
 
@@ -463,40 +530,52 @@ private final Connection connection;
         Letter5.setCaretPosition(pos);
     }//GEN-LAST:event_Letter5KeyReleased
 
+    private void Letter1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter1KeyPressed
+        if(evt.getKeyChar()!= '\n'){
+            Letter2.requestFocus();
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_Letter1KeyPressed
+
+    private void Letter2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter2KeyPressed
+         if(evt.getKeyChar()!= '\n'){
+            Letter3.requestFocus();
+         }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Letter2KeyPressed
+
+    private void Letter3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter3KeyPressed
+         if(evt.getKeyChar()!= '\n'){
+            Letter4.requestFocus();
+         }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Letter3KeyPressed
+
+    private void Letter4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter4KeyPressed
+         if(evt.getKeyChar()!= '\n'){
+            Letter5.requestFocus();
+         }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Letter4KeyPressed
+
+    private void Letter5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter5KeyPressed
+         if(evt.getKeyChar()!= '\n'){
+            Check.requestFocus();
+         }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Letter5KeyPressed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game_Easy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game_Easy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game_Easy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game_Easy.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+        int easyseconds = 300; // 1 minute countdown
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Game_Easy().setVisible(true);
+                new Game_Easy(easyseconds).setVisible(true);
             }
         });
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -509,9 +588,11 @@ private final Connection connection;
     private javax.swing.JTextField Letter4;
     private javax.swing.JTextField Letter5;
     private javax.swing.JButton Newgame;
+    private javax.swing.JLabel Time;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
