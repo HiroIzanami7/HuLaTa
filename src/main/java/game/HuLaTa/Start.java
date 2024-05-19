@@ -91,7 +91,7 @@ public class Start extends javax.swing.JFrame {
     private void StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartActionPerformed
     
         this.setVisible(false);
-        User create = new User();
+        UserManagement create = new UserManagement();
         create.setVisible(true);
         
     }//GEN-LAST:event_StartActionPerformed

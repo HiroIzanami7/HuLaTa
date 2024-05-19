@@ -1,8 +1,15 @@
 package game.HuLaTa;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import game.HuLaTa.User;
+import java.util.ArrayList;
+
 
 
 public class Game_Easy extends javax.swing.JFrame {
@@ -10,10 +17,20 @@ public class Game_Easy extends javax.swing.JFrame {
     
     private javax.swing.Timer timer;
     private int secondsRemaining;
+    private boolean addTimeAllowed;
+    private boolean close1,close2, close3, close4,close5 ;
+ 
     
     public Game_Easy(int easyseconds) {
         initComponents();
+
         this.secondsRemaining = easyseconds;
+        addTimeAllowed = false;
+        close1 = true;
+        close2 = true;
+        close3 = true;
+        close4 = true;
+        close5 = true;
         updateTimerLabel();
         timer = new javax.swing.Timer(1000, new ActionListener() {
             @Override
@@ -28,6 +45,183 @@ public class Game_Easy extends javax.swing.JFrame {
             }
         });
         timer.start();
+        
+        Check.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                String userinput1 = Letter1.getText();
+                String userinput2 = Letter2.getText();
+                String userinput3 = Letter3.getText();
+                String userinput4 = Letter4.getText();
+                String userinput5 = Letter5.getText();
+
+                if( close1){
+                    switch (userinput1) {
+                        case "G" -> {
+                            Letter1.setBackground(Color.GREEN);
+                            Letter1.setEnabled(false);
+                            if(Letter1.getBackground() == Color.GREEN && !addTimeAllowed){
+                                addExtraTime();
+                                addTimeAllowed = false;
+                                updateTimerLabel();
+                                close1 =false;
+                            }
+                        }
+
+                        case "T" -> {
+                            Letter1.setBackground(Color.ORANGE);
+                            Letter1.setEnabled(true);
+                        }
+                        case "S" -> {
+                            Letter1.setBackground(Color.ORANGE);
+                            Letter1.setEnabled(true);
+                        }
+                        case "A" -> {
+                            Letter1.setBackground(Color.ORANGE);
+                            Letter1.setEnabled(true);
+                        }
+                        default -> {
+                            Letter1.setBackground(Color.RED);
+                            Letter1.setEnabled(true);
+                            Letter1.setText("");
+                        }
+                    }
+                }
+                if(close2 ){
+                    switch (userinput2) {
+                        case "A" -> {
+                            Letter2.setBackground(Color.GREEN);
+                            Letter2.setEnabled(false);
+                            if(Letter2.getBackground() == Color.GREEN && !addTimeAllowed){
+                                addTimeAllowed = true;
+                                addExtraTime();
+                                addTimeAllowed = false;
+                                updateTimerLabel();
+                                close2 = false;
+                            }
+                            
+                        }
+                        case "T" -> {
+                            Letter2.setBackground(Color.ORANGE);
+                            Letter2.setEnabled(true);
+                        }
+                        case "G" -> {
+                            Letter2.setBackground(Color.ORANGE);
+                            Letter2.setEnabled(true);
+                        }
+                        case "S" -> {
+                            Letter2.setBackground(Color.ORANGE);
+                            Letter2.setEnabled(true);
+                        }
+                        default -> {
+                            Letter2.setBackground(Color.RED);
+                            Letter2.setEnabled(true);
+                            Letter2.setText("");
+                        }
+                    }
+                }
+                if(close3){
+                    switch (userinput3) {
+                        case "T" -> {
+                            Letter3.setBackground(Color.GREEN);
+                            Letter3.setEnabled(false);
+                            if(Letter3.getBackground() == Color.GREEN && !addTimeAllowed){
+                                addTimeAllowed = true;
+                                addExtraTime();
+                                addTimeAllowed = false;
+                                updateTimerLabel();
+                                close3=false;
+                            }
+                          
+                        }
+                        case "A" -> {
+                            Letter3.setBackground(Color.ORANGE);
+                            Letter3.setEnabled(true);
+                        }
+                        case "G" -> {
+                            Letter3.setBackground(Color.ORANGE);
+                            Letter3.setEnabled(true);
+                        }
+                        case "S" -> {
+                            Letter3.setBackground(Color.ORANGE);
+                            Letter3.setEnabled(true);
+                        }
+                        default -> {
+                            Letter3.setBackground(Color.RED);
+                            Letter3.setEnabled(true);
+                            Letter3.setText("");
+                        }
+                    }
+                }
+        
+                if(close4){
+                    switch (userinput4) {
+                        case "A" -> {
+                            Letter4.setBackground(Color.GREEN);
+                            Letter4.setEnabled(false);
+                            if(Letter4.getBackground() == Color.GREEN && !addTimeAllowed){
+                               addTimeAllowed = true;
+                                addExtraTime();
+                                addTimeAllowed = false;
+                                updateTimerLabel();
+                                close4=false;
+                            }
+                            
+                        }
+                        case "T" -> {
+                            Letter4.setBackground(Color.ORANGE);
+                            Letter4.setEnabled(true);
+                        }
+                        case "G" -> {
+                            Letter4.setBackground(Color.ORANGE);
+                            Letter4.setEnabled(true);
+                        }
+                        case "S" -> {
+                            Letter4.setBackground(Color.ORANGE);
+                            Letter4.setEnabled(true);
+                        }
+                        default -> {
+                            Letter4.setBackground(Color.RED);
+                            Letter4.setEnabled(true);
+                            Letter4.setText("");
+                        }
+                    }
+                }
+        
+                if(close5){
+                    switch (userinput5) {
+                        case "S" -> {
+                            Letter5.setBackground(Color.GREEN);
+                            Letter5.setEnabled(false);
+                            if(Letter5.getBackground() == Color.GREEN && !addTimeAllowed){
+                                addTimeAllowed = true;
+                                addExtraTime();
+                                addTimeAllowed = false;
+                                updateTimerLabel();
+                                close5=false;
+                            }
+                        }
+                        case "A" -> {
+                            Letter5.setBackground(Color.ORANGE);
+                            Letter5.setEnabled(true);
+                        }
+                        case "G" -> {
+                            Letter5.setBackground(Color.ORANGE);
+                            Letter5.setEnabled(true);
+                        }
+                        case "T" -> {
+                            Letter5.setBackground(Color.ORANGE);
+                            Letter5.setEnabled(true);
+                        }
+                        default -> {
+                            Letter5.setBackground(Color.RED);
+                            Letter5.setEnabled(true);
+                            Letter5.setText("");
+                        }
+                    }
+                }  
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +232,7 @@ public class Game_Easy extends javax.swing.JFrame {
         jDialog2 = new javax.swing.JDialog();
         jDialog3 = new javax.swing.JDialog();
         jFrame1 = new javax.swing.JFrame();
+        Fact = new javax.swing.JDialog();
         Newgame = new javax.swing.JButton();
         Check = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -49,6 +244,7 @@ public class Game_Easy extends javax.swing.JFrame {
         Attempt = new javax.swing.JLabel();
         History = new javax.swing.JTextPane();
         Time = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -91,6 +287,17 @@ public class Game_Easy extends javax.swing.JFrame {
         );
         jFrame1Layout.setVerticalGroup(
             jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout FactLayout = new javax.swing.GroupLayout(Fact.getContentPane());
+        Fact.getContentPane().setLayout(FactLayout);
+        FactLayout.setHorizontalGroup(
+            FactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        FactLayout.setVerticalGroup(
+            FactLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 300, Short.MAX_VALUE)
         );
 
@@ -229,225 +436,92 @@ public class Game_Easy extends javax.swing.JFrame {
 
         Time.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        jLabel1.setText("CATEGORY:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(132, 132, 132)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Attempt))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(132, 132, 132)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(8, 8, 8)
-                                        .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(Attempt))))
-                        .addGap(18, 18, 18))
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)))
-                .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Attempt, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Attempt, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 74, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void showDialog(){
+       JButton ok = new JButton("ok"); 
+       ok.addActionListener(new ActionListener (){
+         public void actionPerformed(ActionEvent e) {
+          Fact.dispose();
+          dispose();
+          FunFact fun =new FunFact();
+          fun.setVisible(true);
+         }
+       });
+       Fact.setLayout(new FlowLayout());
+       Fact.add(new JLabel("You Win!!!"));
+       Fact.add(ok);
+       
+       Fact.setSize(200,100);
+       Fact.setLocationRelativeTo(this);
+       Fact.setVisible(true);
+       
+    }
     private void updateTimerLabel() {
         int minutes = secondsRemaining / 60;
         int seconds = secondsRemaining % 60;
         Time.setText(String.format("%02d:%02d", minutes, seconds));
     }
-    private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
-        boolean timeAddedForLetter = true;
-        String userinput1 = Letter1.getText();
-        String userinput2 = Letter2.getText();
-        String userinput3 = Letter3.getText();
-        String userinput4 = Letter4.getText();
-        String userinput5 = Letter5.getText();
-        if( true){
-            switch (userinput1) {
-                case "G" -> {
-                    Letter1.setBackground(Color.GREEN);
-                    Letter1.setEnabled(false);
-                    if(userinput1.equals("G") && timeAddedForLetter){
-                       secondsRemaining +=10;
-                       timeAddedForLetter=false;
-                    }
-                    else{}
-                }
-                
-                case "T" -> {
-                    Letter1.setBackground(Color.ORANGE);
-                    Letter1.setEnabled(true);
-                }
-                case "S" -> {
-                    Letter1.setBackground(Color.ORANGE);
-                    Letter1.setEnabled(true);
-                }
-                case "A" -> {
-                    Letter1.setBackground(Color.ORANGE);
-                    Letter1.setEnabled(true);
-                }
-                default -> {
-                    Letter1.setBackground(Color.RED);
-                    Letter1.setEnabled(true);
-                    Letter1.setText("");
-                }
-            }
-        }
-        if( true){
-            switch (userinput2) {
-                case "A" -> {
-                    Letter2.setBackground(Color.GREEN);
-                    Letter2.setEnabled(false);
-                    if(userinput2.equals("A") &&!timeAddedForLetter){
-                       secondsRemaining +=10;
-                       timeAddedForLetter=true;
-                    }
-                    else{}
-                }
-                case "T" -> {
-                    Letter2.setBackground(Color.ORANGE);
-                    Letter2.setEnabled(true);
-                }
-                case "G" -> {
-                    Letter2.setBackground(Color.ORANGE);
-                    Letter2.setEnabled(true);
-                }
-                case "S" -> {
-                    Letter2.setBackground(Color.ORANGE);
-                    Letter2.setEnabled(true);
-                }
-                default -> {
-                    Letter2.setBackground(Color.RED);
-                    Letter2.setEnabled(true);
-                    Letter2.setText("");
-                }
-            }
-        }
-        if( true){
-             switch (userinput3) {
-                case "T" -> {
-                    Letter3.setBackground(Color.GREEN);
-                    Letter3.setEnabled(false);
-                    if(userinput3.equals("T") &&!timeAddedForLetter){
-                       secondsRemaining +=10;
-                       timeAddedForLetter=true;
-                    }
-                    else{}
-                }
-                case "A" -> {
-                    Letter3.setBackground(Color.ORANGE);
-                    Letter3.setEnabled(true);
-                }
-                case "G" -> {
-                    Letter3.setBackground(Color.ORANGE);
-                    Letter3.setEnabled(true);
-                }
-                case "S" -> {
-                    Letter3.setBackground(Color.ORANGE);
-                    Letter3.setEnabled(true);
-                }
-                default -> {
-                    Letter3.setBackground(Color.RED);
-                    Letter3.setEnabled(true);
-                    Letter3.setText("");
-                }
-            }
-        }
-        if( true){
-            switch (userinput4) {
-                case "A" -> {
-                    Letter4.setBackground(Color.GREEN);
-                    Letter4.setEnabled(false);
-                    if(userinput4.equals("A") &&!timeAddedForLetter){
-                       secondsRemaining +=10;
-                       timeAddedForLetter=true;
-                    }
-                    else{}
-                }
-                case "T" -> {
-                    Letter4.setBackground(Color.ORANGE);
-                    Letter4.setEnabled(true);
-                }
-                case "G" -> {
-                    Letter4.setBackground(Color.ORANGE);
-                    Letter4.setEnabled(true);
-                }
-                case "S" -> {
-                    Letter4.setBackground(Color.ORANGE);
-                    Letter4.setEnabled(true);
-                }
-                default -> {
-                    Letter4.setBackground(Color.RED);
-                    Letter4.setEnabled(true);
-                    Letter4.setText("");
-                }
-            }
-        }
-        if( true){
-            switch (userinput5) {
-                case "S" -> {
-                    Letter5.setBackground(Color.GREEN);
-                    Letter5.setEnabled(false);
-                    if(userinput5.equals("S") &&!timeAddedForLetter){
-                       secondsRemaining +=10;
-                       timeAddedForLetter=true;
-                    }
-                    else{}
-                }
-                case "A" -> {
-                    Letter5.setBackground(Color.ORANGE);
-                    Letter5.setEnabled(true);
-                }
-                case "G" -> {
-                    Letter5.setBackground(Color.ORANGE);
-                    Letter5.setEnabled(true);
-                }
-                case "T" -> {
-                    Letter5.setBackground(Color.ORANGE);
-                    Letter5.setEnabled(true);
-                }
-                default -> {
-                    Letter5.setBackground(Color.RED);
-                    Letter5.setEnabled(true);
-                    Letter5.setText("");
-                }
-            }
-        }
-    }//GEN-LAST:event_CheckActionPerformed
-
+    private void addExtraTime(){
+       secondsRemaining +=10;
+    }
+    
     private void NewgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewgameActionPerformed
         this.setVisible(false);
         Game_Level levelFrame = new Game_Level();
@@ -531,38 +605,46 @@ public class Game_Easy extends javax.swing.JFrame {
     }//GEN-LAST:event_Letter5KeyReleased
 
     private void Letter1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter1KeyPressed
-        if(evt.getKeyChar()!= '\n'){
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Letter2.requestFocus();
         }// TODO add your handling code here:
     }//GEN-LAST:event_Letter1KeyPressed
 
     private void Letter2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter2KeyPressed
-         if(evt.getKeyChar()!= '\n'){
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Letter3.requestFocus();
          }
         // TODO add your handling code here:
     }//GEN-LAST:event_Letter2KeyPressed
 
     private void Letter3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter3KeyPressed
-         if(evt.getKeyChar()!= '\n'){
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Letter4.requestFocus();
          }
         // TODO add your handling code here:
     }//GEN-LAST:event_Letter3KeyPressed
 
     private void Letter4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter4KeyPressed
-         if(evt.getKeyChar()!= '\n'){
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Letter5.requestFocus();
          }
         // TODO add your handling code here:
     }//GEN-LAST:event_Letter4KeyPressed
 
     private void Letter5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter5KeyPressed
-         if(evt.getKeyChar()!= '\n'){
+         if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             Check.requestFocus();
          }
         // TODO add your handling code here:
     }//GEN-LAST:event_Letter5KeyPressed
+
+    private void CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CheckActionPerformed
+        if(Letter1.getBackground() == Color.GREEN && Letter2.getBackground() == Color.GREEN && Letter3.getBackground() == Color.GREEN && Letter4.getBackground() == Color.GREEN && Letter5.getBackground() == Color.GREEN){
+                   showDialog();
+                   int score = 10;
+                   
+                }// TODO add your handling code here:
+    }//GEN-LAST:event_CheckActionPerformed
 
     /**
      * @param args the command line arguments
@@ -580,7 +662,8 @@ public class Game_Easy extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Attempt;
-    private javax.swing.JButton Check;
+    public javax.swing.JButton Check;
+    private javax.swing.JDialog Fact;
     private javax.swing.JTextPane History;
     private javax.swing.JTextField Letter1;
     private javax.swing.JTextField Letter2;
@@ -593,6 +676,7 @@ public class Game_Easy extends javax.swing.JFrame {
     private javax.swing.JDialog jDialog2;
     private javax.swing.JDialog jDialog3;
     private javax.swing.JFrame jFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
