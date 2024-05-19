@@ -4,14 +4,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Game_Hard extends javax.swing.JFrame {
+public class Game_Extreme extends javax.swing.JFrame {
 
     private javax.swing.Timer timer;
     private int secondsRemaining;
     
-    public Game_Hard(int hardseconds) {
+    public Game_Extreme(int extremeseconds) {
         initComponents();
-        this.secondsRemaining = hardseconds;
+        this.secondsRemaining = extremeseconds;
         updateTimerLabel();
         timer = new javax.swing.Timer(1000, new ActionListener() {
             @Override
@@ -27,47 +27,28 @@ public class Game_Hard extends javax.swing.JFrame {
         });
         timer.start();
     }
-    private void updateTimerLabel() {
-        int minutes = secondsRemaining / 60;
-        int seconds = secondsRemaining % 60;
-        Time.setText(String.format("%02d:%02d", minutes, seconds));
-    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
-        Newgame = new javax.swing.JButton();
         Check = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        Letter1 = new javax.swing.JTextField();
         Letter2 = new javax.swing.JTextField();
         Letter3 = new javax.swing.JTextField();
         Letter4 = new javax.swing.JTextField();
         Letter5 = new javax.swing.JTextField();
         Letter6 = new javax.swing.JTextField();
         Letter7 = new javax.swing.JTextField();
+        Letter1 = new javax.swing.JTextField();
+        Letter8 = new javax.swing.JTextField();
+        Newgame = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         History = new javax.swing.JTextPane();
         Attempt1 = new javax.swing.JLabel();
         Time = new javax.swing.JLabel();
 
-        jScrollPane2.setViewportView(jTextPane1);
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        Newgame.setBackground(new java.awt.Color(0, 204, 255));
-        Newgame.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 14)); // NOI18N
-        Newgame.setForeground(new java.awt.Color(255, 255, 255));
-        Newgame.setText("NEW GAME");
-        Newgame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        Newgame.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewgameActionPerformed(evt);
-            }
-        });
 
         Check.setBackground(new java.awt.Color(102, 255, 102));
         Check.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 14)); // NOI18N
@@ -77,18 +58,6 @@ public class Game_Hard extends javax.swing.JFrame {
         Check.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CheckActionPerformed(evt);
-            }
-        });
-
-        Letter1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
-        Letter1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        Letter1.setActionCommand("<Not Set>");
-        Letter1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                Letter1KeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                Letter1KeyTyped(evt);
             }
         });
 
@@ -158,12 +127,40 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         });
 
+        Letter1.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
+        Letter1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Letter1.setActionCommand("<Not Set>");
+        Letter1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Letter1ActionPerformed(evt);
+            }
+        });
+        Letter1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Letter1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Letter1KeyTyped(evt);
+            }
+        });
+
+        Letter8.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
+        Letter8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Letter8.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Letter8KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Letter8KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(Letter1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Letter2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,26 +170,40 @@ public class Game_Hard extends javax.swing.JFrame {
                 .addComponent(Letter4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Letter5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Letter6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Letter7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Letter8, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Letter1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Letter7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Letter7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Letter1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Letter8, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
+
+        Newgame.setBackground(new java.awt.Color(0, 204, 255));
+        Newgame.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 14)); // NOI18N
+        Newgame.setForeground(new java.awt.Color(255, 255, 255));
+        Newgame.setText("NEW GAME");
+        Newgame.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Newgame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewgameActionPerformed(evt);
+            }
+        });
 
         History.setEditable(false);
         History.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PREVIOUS WORDS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Rounded MT Bold", 3, 14), new java.awt.Color(204, 0, 51))); // NOI18N
@@ -218,13 +229,12 @@ public class Game_Hard extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Attempt1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGap(158, 158, 158)
+                        .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(Attempt1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53))
         );
@@ -233,11 +243,11 @@ public class Game_Hard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(19, 19, 19)
                 .addComponent(Attempt1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -250,7 +260,12 @@ public class Game_Hard extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void updateTimerLabel() {
+        int minutes = secondsRemaining / 60;
+        int seconds = secondsRemaining % 60;
+        Time.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+    
     private void NewgameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewgameActionPerformed
         this.setVisible(false);
         Game_Level levelFrame = new Game_Level();
@@ -265,35 +280,59 @@ public class Game_Hard extends javax.swing.JFrame {
         String userinput5 = Letter5.getText();
         String userinput6 = Letter6.getText();
         String userinput7 = Letter7.getText();
+        String userinput8 = Letter8.getText();
         if( true){
-            if(userinput1.equals("A")){
+            if(userinput1.equals("M")){
                 Letter1.setBackground(Color.GREEN);
                 Letter1.setEnabled(false);
             }
-            else if(userinput1.equals("L")){
+            else if(userinput1.equals("I")){
                 Letter1.setBackground(Color.ORANGE);
                 Letter1.setEnabled(true);
             }
-            else if(userinput1.equals("P")){
+            else if(userinput1.equals("K")){
                 Letter1.setBackground(Color.ORANGE);
                 Letter1.setEnabled(true);
             }
-
+            else if(userinput1.equals("T")){
+                Letter1.setBackground(Color.ORANGE);
+                Letter1.setEnabled(true);
+            }
+            else if(userinput1.equals("N")){
+                Letter1.setBackground(Color.ORANGE);
+                Letter1.setEnabled(true);
+            }
+            else if(userinput1.equals("G")){
+                Letter1.setBackground(Color.ORANGE);
+                Letter1.setEnabled(true);
+            }
             else{
                 Letter1.setBackground(Color.RED);
                 Letter1.setEnabled(true);
             }
         }
         if( true){
-            if(userinput2.equals("L")){
+            if(userinput2.equals("I")){
                 Letter2.setBackground(Color.GREEN);
                 Letter2.setEnabled(false);
             }
-            else if(userinput2.equals("A")){
+            else if(userinput2.equals("M")){
                 Letter2.setBackground(Color.ORANGE);
                 Letter2.setEnabled(true);
             }
-            else if(userinput2.equals("P")){
+            else if(userinput2.equals("K")){
+                Letter2.setBackground(Color.ORANGE);
+                Letter2.setEnabled(true);
+            }
+            else if(userinput2.equals("T")){
+                Letter2.setBackground(Color.ORANGE);
+                Letter2.setEnabled(true);
+            }
+            else if(userinput2.equals("N")){
+                Letter2.setBackground(Color.ORANGE);
+                Letter2.setEnabled(true);
+            }
+            else if(userinput2.equals("G")){
                 Letter2.setBackground(Color.ORANGE);
                 Letter2.setEnabled(true);
             }
@@ -303,15 +342,27 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput3.equals("A")){
+            if(userinput3.equals("K")){
                 Letter3.setBackground(Color.GREEN);
                 Letter3.setEnabled(false);
             }
-            else if(userinput3.equals("L")){
+            else if(userinput3.equals("M")){
                 Letter3.setBackground(Color.ORANGE);
                 Letter3.setEnabled(true);
             }
-            else if(userinput3.equals("P")){
+            else if(userinput3.equals("I")){
+                Letter3.setBackground(Color.ORANGE);
+                Letter3.setEnabled(true);
+            }
+            else if(userinput3.equals("T")){
+                Letter3.setBackground(Color.ORANGE);
+                Letter3.setEnabled(true);
+            }
+            else if(userinput3.equals("N")){
+                Letter3.setBackground(Color.ORANGE);
+                Letter3.setEnabled(true);
+            }
+            else if(userinput3.equals("G")){
                 Letter3.setBackground(Color.ORANGE);
                 Letter3.setEnabled(true);
             }
@@ -321,15 +372,27 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput4.equals("P")){
+            if(userinput4.equals("T")){
                 Letter4.setBackground(Color.GREEN);
                 Letter4.setEnabled(false);
             }
-            else if(userinput4.equals("A")){
+            else if(userinput4.equals("M")){
                 Letter4.setBackground(Color.ORANGE);
                 Letter4.setEnabled(true);
             }
-            else if(userinput4.equals("L")){
+            else if(userinput4.equals("I")){
+                Letter4.setBackground(Color.ORANGE);
+                Letter4.setEnabled(true);
+            }
+            else if(userinput4.equals("K")){
+                Letter4.setBackground(Color.ORANGE);
+                Letter4.setEnabled(true);
+            }
+            else if(userinput4.equals("N")){
+                Letter4.setBackground(Color.ORANGE);
+                Letter4.setEnabled(true);
+            }
+            else if(userinput4.equals("G")){
                 Letter4.setBackground(Color.ORANGE);
                 Letter4.setEnabled(true);
             }
@@ -339,15 +402,27 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput5.equals("A")){
+            if(userinput5.equals("I")){
                 Letter5.setBackground(Color.GREEN);
                 Letter5.setEnabled(false);
             }
-            else if(userinput5.equals("P")){
+            else if(userinput5.equals("T")){
                 Letter5.setBackground(Color.ORANGE);
                 Letter5.setEnabled(true);
             }
-            else if(userinput5.equals("L")){
+            else if(userinput5.equals("M")){
+                Letter5.setBackground(Color.ORANGE);
+                Letter5.setEnabled(true);
+            }
+            else if(userinput5.equals("K")){
+                Letter5.setBackground(Color.ORANGE);
+                Letter5.setEnabled(true);
+            }
+            else if(userinput5.equals("N")){
+                Letter5.setBackground(Color.ORANGE);
+                Letter5.setEnabled(true);
+            }
+            else if(userinput5.equals("G")){
                 Letter5.setBackground(Color.ORANGE);
                 Letter5.setEnabled(true);
             }
@@ -357,15 +432,27 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput6.equals("A")){
+            if(userinput6.equals("N")){
                 Letter6.setBackground(Color.GREEN);
                 Letter6.setEnabled(false);
             }
-            else if(userinput6.equals("L")){
+            else if(userinput6.equals("M")){
                 Letter6.setBackground(Color.ORANGE);
                 Letter6.setEnabled(true);
             }
-            else if(userinput6.equals("P")){
+            else if(userinput6.equals("I")){
+                Letter6.setBackground(Color.ORANGE);
+                Letter6.setEnabled(true);
+            }
+            else if(userinput6.equals("K")){
+                Letter6.setBackground(Color.ORANGE);
+                Letter6.setEnabled(true);
+            }
+            else if(userinput6.equals("T")){
+                Letter6.setBackground(Color.ORANGE);
+                Letter6.setEnabled(true);
+            }
+            else if(userinput6.equals("G")){
                 Letter6.setBackground(Color.ORANGE);
                 Letter6.setEnabled(true);
             }
@@ -375,15 +462,27 @@ public class Game_Hard extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput7.equals("P")){
+            if(userinput7.equals("I")){
                 Letter7.setBackground(Color.GREEN);
                 Letter7.setEnabled(false);
             }
-            else if(userinput7.equals("A")){
+            else if(userinput7.equals("T")){
                 Letter7.setBackground(Color.ORANGE);
                 Letter7.setEnabled(true);
             }
-            else if(userinput7.equals("L")){
+            else if(userinput7.equals("M")){
+                Letter7.setBackground(Color.ORANGE);
+                Letter7.setEnabled(true);
+            }
+            else if(userinput7.equals("K")){
+                Letter7.setBackground(Color.ORANGE);
+                Letter7.setEnabled(true);
+            }
+            else if(userinput7.equals("N")){
+                Letter7.setBackground(Color.ORANGE);
+                Letter7.setEnabled(true);
+            }
+            else if(userinput7.equals("G")){
                 Letter7.setBackground(Color.ORANGE);
                 Letter7.setEnabled(true);
             }
@@ -391,7 +490,39 @@ public class Game_Hard extends javax.swing.JFrame {
                 Letter7.setBackground(Color.RED);
                 Letter7.setEnabled(true);
             }
-            History.setText(userinput1+userinput2+userinput3+userinput4+userinput5+userinput6+userinput7);
+        }
+        if( true){
+            if(userinput8.equals("G")){
+                Letter8.setBackground(Color.GREEN);
+                Letter8.setEnabled(false);
+            }
+            else if(userinput8.equals("M")){
+                Letter8.setBackground(Color.ORANGE);
+                Letter8.setEnabled(true);
+            }
+            else if(userinput8.equals("I")){
+                Letter8.setBackground(Color.ORANGE);
+                Letter8.setEnabled(true);
+            }
+            else if(userinput8.equals("K")){
+                Letter8.setBackground(Color.ORANGE);
+                Letter8.setEnabled(true);
+            }
+            else if(userinput8.equals("T")){
+                Letter8.setBackground(Color.ORANGE);
+                Letter8.setEnabled(true);
+            }
+            else if(userinput8.equals("N")){
+                Letter8.setBackground(Color.ORANGE);
+                Letter8.setEnabled(true);
+            
+            }
+            else{
+                Letter8.setBackground(Color.RED);
+                Letter8.setEnabled(true);
+            }
+        
+            History.setText(userinput1+userinput2+userinput3+userinput4+userinput5+userinput6+userinput7+userinput8);
         }
     }//GEN-LAST:event_CheckActionPerformed
 
@@ -475,6 +606,7 @@ public class Game_Hard extends javax.swing.JFrame {
         int pos = Letter6.getCaretPosition();
         Letter6.setText(Letter6.getText().toUpperCase());
         Letter6.setCaretPosition(pos);
+             
     }//GEN-LAST:event_Letter6KeyReleased
 
     private void Letter6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter6KeyTyped
@@ -490,6 +622,7 @@ public class Game_Hard extends javax.swing.JFrame {
         int pos = Letter7.getCaretPosition();
         Letter7.setText(Letter7.getText().toUpperCase());
         Letter7.setCaretPosition(pos);
+          
     }//GEN-LAST:event_Letter7KeyReleased
 
     private void Letter7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter7KeyTyped
@@ -500,6 +633,26 @@ public class Game_Hard extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_Letter7KeyTyped
+
+    private void Letter8KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter8KeyReleased
+        int pos = Letter8.getCaretPosition();
+        Letter8.setText(Letter8.getText().toUpperCase());
+        Letter8.setCaretPosition(pos);
+             
+    }//GEN-LAST:event_Letter8KeyReleased
+
+    private void Letter8KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter8KeyTyped
+        if(!(Character.isLetter(evt.getKeyChar()))){
+            evt.consume();
+        }
+        else if (Letter8.getText().length() >= 1 ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_Letter8KeyTyped
+
+    private void Letter1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Letter1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Letter1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,21 +671,20 @@ public class Game_Hard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Extreme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Extreme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Extreme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Game_Extreme.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        int hardseconds = 300;
+        int extremeseconds = 300;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Game_Hard(hardseconds).setVisible(true);
+                new Game_Extreme(extremeseconds).setVisible(true);
             }
         });
     }
@@ -548,11 +700,11 @@ public class Game_Hard extends javax.swing.JFrame {
     private javax.swing.JTextField Letter5;
     private javax.swing.JTextField Letter6;
     private javax.swing.JTextField Letter7;
+    private javax.swing.JTextField Letter8;
     private javax.swing.JButton Newgame;
     private javax.swing.JLabel Time;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
+      
 }

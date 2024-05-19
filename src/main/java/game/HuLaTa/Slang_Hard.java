@@ -1,29 +1,44 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package game.HuLaTa;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-/**
- *
- * @author Nene
- */
-public class Game_Average extends javax.swing.JFrame {
+public class Slang_Hard extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Game_Average
-     */
-    public Game_Average() {
+    private javax.swing.Timer timer;
+    private int secondsRemaining;
+    
+    public Slang_Hard(int hardseconds) {
         initComponents();
+        this.secondsRemaining = hardseconds;
+        updateTimerLabel();
+        timer = new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                secondsRemaining--;
+                if (secondsRemaining <= 0) {
+                    timer.stop();
+                    Time.setText("Time's up!");
+                } else {
+                    updateTimerLabel();
+                }
+            }
+        });
+        timer.start();
+    }
+    private void updateTimerLabel() {
+        int minutes = secondsRemaining / 60;
+        int seconds = secondsRemaining % 60;
+        Time.setText(String.format("%02d:%02d", minutes, seconds));
     }
 
-    int attempt = 5;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextPane1 = new javax.swing.JTextPane();
         Newgame = new javax.swing.JButton();
         Check = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -33,8 +48,13 @@ public class Game_Average extends javax.swing.JFrame {
         Letter4 = new javax.swing.JTextField();
         Letter5 = new javax.swing.JTextField();
         Letter6 = new javax.swing.JTextField();
-        Attempt = new javax.swing.JLabel();
+        Letter7 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
         History = new javax.swing.JTextPane();
+        Attempt1 = new javax.swing.JLabel();
+        Time = new javax.swing.JLabel();
+
+        jScrollPane2.setViewportView(jTextPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +147,17 @@ public class Game_Average extends javax.swing.JFrame {
             }
         });
 
+        Letter7.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 16)); // NOI18N
+        Letter7.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        Letter7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Letter7KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                Letter7KeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -142,9 +173,11 @@ public class Game_Average extends javax.swing.JFrame {
                 .addComponent(Letter4, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Letter5, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(Letter6, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Letter7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,16 +189,19 @@ public class Game_Average extends javax.swing.JFrame {
                     .addComponent(Letter3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter4, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Letter5, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Letter6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Letter6, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Letter7, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        Attempt.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        Attempt.setText("Attempt:5");
-
         History.setEditable(false);
         History.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "PREVIOUS WORDS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Arial Rounded MT Bold", 3, 14), new java.awt.Color(204, 0, 51))); // NOI18N
-        History.setAutoscrolls(false);
+        jScrollPane1.setViewportView(History);
+
+        Attempt1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        Attempt1.setText("Time Remaining:");
+
+        Time.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,32 +215,37 @@ public class Game_Average extends javax.swing.JFrame {
                         .addGap(51, 51, 51)
                         .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(158, 158, 158)
-                        .addComponent(Attempt))
+                        .addGap(29, 29, 29)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(121, 121, 121))
+                        .addGap(173, 173, 173)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Attempt1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(History, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Attempt)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(57, 57, 57))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Attempt1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Time, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Newgame, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Check, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(47, 47, 47))
         );
 
         pack();
@@ -223,42 +264,36 @@ public class Game_Average extends javax.swing.JFrame {
         String userinput4 = Letter4.getText();
         String userinput5 = Letter5.getText();
         String userinput6 = Letter6.getText();
+        String userinput7 = Letter7.getText();
         if( true){
-            if(userinput1.equals("K")){
+            if(userinput1.equals("A")){
                 Letter1.setBackground(Color.GREEN);
                 Letter1.setEnabled(false);
             }
-            else if(userinput1.equals("T")){
+            else if(userinput1.equals("L")){
                 Letter1.setBackground(Color.ORANGE);
                 Letter1.setEnabled(true);
             }
-            else if(userinput1.equals("O")){
+            else if(userinput1.equals("P")){
                 Letter1.setBackground(Color.ORANGE);
                 Letter1.setEnabled(true);
             }
-            else if(userinput1.equals("A")){
-                Letter1.setBackground(Color.ORANGE);
-                Letter1.setEnabled(true);
-            }
+
             else{
                 Letter1.setBackground(Color.RED);
                 Letter1.setEnabled(true);
             }
         }
         if( true){
-            if(userinput2.equals("A")){
+            if(userinput2.equals("L")){
                 Letter2.setBackground(Color.GREEN);
                 Letter2.setEnabled(false);
             }
-            else if(userinput2.equals("T")){
+            else if(userinput2.equals("A")){
                 Letter2.setBackground(Color.ORANGE);
                 Letter2.setEnabled(true);
             }
-            else if(userinput2.equals("K")){
-                Letter2.setBackground(Color.ORANGE);
-                Letter2.setEnabled(true);
-            }
-            else if(userinput2.equals("O")){
+            else if(userinput2.equals("P")){
                 Letter2.setBackground(Color.ORANGE);
                 Letter2.setEnabled(true);
             }
@@ -268,19 +303,15 @@ public class Game_Average extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput3.equals("T")){
+            if(userinput3.equals("A")){
                 Letter3.setBackground(Color.GREEN);
                 Letter3.setEnabled(false);
             }
-            else if(userinput4.equals("O")){
+            else if(userinput3.equals("L")){
                 Letter3.setBackground(Color.ORANGE);
                 Letter3.setEnabled(true);
             }
-            else if(userinput4.equals("K")){
-                Letter3.setBackground(Color.ORANGE);
-                Letter3.setEnabled(true);
-            }
-            else if(userinput3.equals("A")){
+            else if(userinput3.equals("P")){
                 Letter3.setBackground(Color.ORANGE);
                 Letter3.setEnabled(true);
             }
@@ -290,9 +321,17 @@ public class Game_Average extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput4.equals("O")){
+            if(userinput4.equals("P")){
                 Letter4.setBackground(Color.GREEN);
                 Letter4.setEnabled(false);
+            }
+            else if(userinput4.equals("A")){
+                Letter4.setBackground(Color.ORANGE);
+                Letter4.setEnabled(true);
+            }
+            else if(userinput4.equals("L")){
+                Letter4.setBackground(Color.ORANGE);
+                Letter4.setEnabled(true);
             }
             else{
                 Letter4.setBackground(Color.RED);
@@ -300,19 +339,15 @@ public class Game_Average extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput5.equals("T")){
+            if(userinput5.equals("A")){
                 Letter5.setBackground(Color.GREEN);
                 Letter5.setEnabled(false);
             }
-            else if(userinput5.equals("O")){
+            else if(userinput5.equals("P")){
                 Letter5.setBackground(Color.ORANGE);
                 Letter5.setEnabled(true);
             }
-            else if(userinput5.equals("K")){
-                Letter5.setBackground(Color.ORANGE);
-                Letter5.setEnabled(true);
-            }
-            else if(userinput5.equals("A")){
+            else if(userinput5.equals("L")){
                 Letter5.setBackground(Color.ORANGE);
                 Letter5.setEnabled(true);
             }
@@ -322,19 +357,15 @@ public class Game_Average extends javax.swing.JFrame {
             }
         }
         if( true){
-            if(userinput6.equals("O")){
+            if(userinput6.equals("A")){
                 Letter6.setBackground(Color.GREEN);
                 Letter6.setEnabled(false);
             }
-            else if(userinput6.equals("T")){
+            else if(userinput6.equals("L")){
                 Letter6.setBackground(Color.ORANGE);
                 Letter6.setEnabled(true);
             }
-            else if(userinput6.equals("A")){
-                Letter6.setBackground(Color.ORANGE);
-                Letter6.setEnabled(true);
-            }
-            else if(userinput6.equals("K")){
+            else if(userinput6.equals("P")){
                 Letter6.setBackground(Color.ORANGE);
                 Letter6.setEnabled(true);
             }
@@ -343,10 +374,24 @@ public class Game_Average extends javax.swing.JFrame {
                 Letter6.setEnabled(true);
             }
         }
-        if (attempt > 0){
-            attempt -= 1;
-            Attempt.setText("Attempt:"+attempt);
-            History.setText(userinput1+userinput2+userinput3+userinput4+userinput5+userinput6);
+        if( true){
+            if(userinput7.equals("P")){
+                Letter7.setBackground(Color.GREEN);
+                Letter7.setEnabled(false);
+            }
+            else if(userinput7.equals("A")){
+                Letter7.setBackground(Color.ORANGE);
+                Letter7.setEnabled(true);
+            }
+            else if(userinput7.equals("L")){
+                Letter7.setBackground(Color.ORANGE);
+                Letter7.setEnabled(true);
+            }
+            else{
+                Letter7.setBackground(Color.RED);
+                Letter7.setEnabled(true);
+            }
+            History.setText(userinput1+userinput2+userinput3+userinput4+userinput5+userinput6+userinput7);
         }
     }//GEN-LAST:event_CheckActionPerformed
 
@@ -441,6 +486,21 @@ public class Game_Average extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_Letter6KeyTyped
 
+    private void Letter7KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter7KeyReleased
+        int pos = Letter7.getCaretPosition();
+        Letter7.setText(Letter7.getText().toUpperCase());
+        Letter7.setCaretPosition(pos);
+    }//GEN-LAST:event_Letter7KeyReleased
+
+    private void Letter7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Letter7KeyTyped
+        if(!(Character.isLetter(evt.getKeyChar()))){
+            evt.consume();
+        }
+        else if (Letter7.getText().length() >= 1 ){
+            evt.consume();
+        }
+    }//GEN-LAST:event_Letter7KeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -458,26 +518,27 @@ public class Game_Average extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Game_Average.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Slang_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Game_Average.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Slang_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Game_Average.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Slang_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Game_Average.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Slang_Hard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        //</editor-fold>
+        int hardseconds = 300;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Game_Average().setVisible(true);
+                new Slang_Hard(hardseconds).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Attempt;
+    private javax.swing.JLabel Attempt1;
     private javax.swing.JButton Check;
     private javax.swing.JTextPane History;
     private javax.swing.JTextField Letter1;
@@ -486,7 +547,12 @@ public class Game_Average extends javax.swing.JFrame {
     private javax.swing.JTextField Letter4;
     private javax.swing.JTextField Letter5;
     private javax.swing.JTextField Letter6;
+    private javax.swing.JTextField Letter7;
     private javax.swing.JButton Newgame;
+    private javax.swing.JLabel Time;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 }

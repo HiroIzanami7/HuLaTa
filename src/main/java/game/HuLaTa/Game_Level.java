@@ -4,6 +4,9 @@ package game.HuLaTa;
 public class Game_Level extends javax.swing.JFrame {
 
     private int easyseconds = 300;
+    private int mediumseconds = 300;
+    private int hardseconds = 300;
+    private int extremeseconds = 300;
 
     public Game_Level() {
         initComponents();
@@ -19,6 +22,7 @@ public class Game_Level extends javax.swing.JFrame {
         Hard = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         Extreme = new javax.swing.JButton();
+        Slang = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -68,10 +72,20 @@ public class Game_Level extends javax.swing.JFrame {
         Extreme.setBackground(new java.awt.Color(51, 255, 255));
         Extreme.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
         Extreme.setForeground(new java.awt.Color(255, 255, 255));
-        Extreme.setText("SLANG");
+        Extreme.setText("Extreme");
         Extreme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ExtremeActionPerformed(evt);
+            }
+        });
+
+        Slang.setBackground(new java.awt.Color(51, 255, 255));
+        Slang.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 14)); // NOI18N
+        Slang.setForeground(new java.awt.Color(255, 255, 255));
+        Slang.setText("Slang");
+        Slang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SlangActionPerformed(evt);
             }
         });
 
@@ -79,17 +93,19 @@ public class Game_Level extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Easy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Average))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Slang, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(191, 191, 191)
+                            .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(71, 71, 71)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(Easy, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(Average)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Hard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Extreme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -106,7 +122,9 @@ public class Game_Level extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Average)
                     .addComponent(Extreme))
-                .addGap(64, 64, 64)
+                .addGap(18, 18, 18)
+                .addComponent(Slang)
+                .addGap(22, 22, 22)
                 .addComponent(Back)
                 .addGap(46, 46, 46))
         );
@@ -131,21 +149,28 @@ public class Game_Level extends javax.swing.JFrame {
 
     private void AverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AverageActionPerformed
         this.setVisible(false);
-        Game_Average game2 = new Game_Average();
+        Game_Medium game2 = new Game_Medium(mediumseconds);
         game2.setVisible(true);
     }//GEN-LAST:event_AverageActionPerformed
 
     private void HardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HardActionPerformed
         this.setVisible(false);
-        Game_Hard game3 = new Game_Hard();
+        Game_Hard game3 = new Game_Hard(hardseconds);
         game3.setVisible(true);
     }//GEN-LAST:event_HardActionPerformed
 
     private void ExtremeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExtremeActionPerformed
         this.setVisible(false);
-        Game_Slang game4 = new Game_Slang();
+        Game_Extreme game4 = new Game_Extreme(extremeseconds);
         game4.setVisible(true);
     }//GEN-LAST:event_ExtremeActionPerformed
+
+    private void SlangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SlangActionPerformed
+        this.setVisible(false);
+        Slang_Level game5 =  new Slang_Level();
+        game5.setVisible(true);
+// TODO add your handling code here:
+    }//GEN-LAST:event_SlangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,5 +214,6 @@ public class Game_Level extends javax.swing.JFrame {
     private javax.swing.JButton Easy;
     private javax.swing.JButton Extreme;
     private javax.swing.JButton Hard;
+    private javax.swing.JButton Slang;
     // End of variables declaration//GEN-END:variables
 }
